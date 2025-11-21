@@ -1,0 +1,15 @@
+# Example terraform.tfvars
+#copy these values to terraform.tfvars and replace with values for your cluster
+aws_region   = "us-east-1"
+cluster_name = "my-cluster"
+
+# Existing VPC where EKS will be deployed
+vpc_id       = "vpc-xxxxxxxxxxxxxxxxx"
+
+# Public subnets (must have route to IGW)
+subnet_ids = [
+  "subnet-aaaaaaaaaaaaaaaaa",
+  "subnet-bbbbbbbbbbbbbbbbb",
+  "subnet-ccccccccccccccccc",
+]
+
