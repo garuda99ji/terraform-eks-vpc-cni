@@ -117,16 +117,20 @@ resource "aws_eks_node_group" "managed_node_group" {
   instance_types  = ["t3.medium"]
 
   scaling_config {
-    desired_size = 3
-    max_size     = 6
-    min_size     = 1 # It's good practice to set a min_size
+    desired_size = 2
+    max_size     = 3
+    min_size     = 1
   }
 
   update_config {
-    max_unavailable = 1 # During an update, only one node will be taken down at a time.
+    max_unavailable = 1
   }
 
-  # Ensure that the cluster and node IAM roles are fully provisioned before creating the node group.
+  tags = {
+    Project     = "terraform-eks-vpc-cni"
+    Environment = "demo"
+  }
+
   depends_on = [
     aws_iam_role_policy_attachment.eks_worker_node_policy,
     aws_iam_role_policy_attachment.eks_cni_policy,
