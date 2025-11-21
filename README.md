@@ -20,7 +20,7 @@ Create a file named terraform.tfvars in the same directory as the .tf files and 
 
 Example terraform.tfvars
 
-aws_region   = "us-east-1"
+aws_region   = "your region from terraform.tfvars.example"
 cluster_name = "production-eks-cluster"
 vpc_id       = "vpc-xxxxxxxxxxxxxxxxx"
 subnet_ids   = ["subnet-xxxxxxxxxxxxxxxxx", "subnet-yyyyyyyyyyyyyyyyy", "subnet-zzzzzzzzzzzzzzzzz"]
@@ -52,7 +52,7 @@ Terraform will ask for confirmation. Type yes and press Enter. Wait for 10-15 mi
 After the terraform apply command completes, it will output the necessary information to configure kubectl to connect to your new cluster. You can use the AWS CLI to update your kubeconfig file:
 
 ```bash
-aws eks --region $(terraform output -raw aws_region) update-kubeconfig --name $(terraform output -raw cluster_name)
+aws eks --region us-east-1 update-kubeconfig --name $(terraform output -raw cluster_name)
 ```
 
 6. Verify Cluster Access:
@@ -76,3 +76,12 @@ Again, Terraform will ask for confirmation. Type yes and press Enter.
 
 1. VPC is not properly configured - check internet gateway, security group outbound rules and route table.
 2. Define only public subnet - otherwise node could be launched in private subnet and would require a NAT gateway to talk to the internet.
+
+## optional cleanup
+
+Remove committed terraform.tfstate and terraform.tfstate.backup from the repo.
+After cleaning, .gitignore will prevent them from coming back.
+
+
+## Note:
+Do not commit terraform.tfstate or terraform.tfvars to Git. These files are local and may contain sensitive or environment-specific information.
