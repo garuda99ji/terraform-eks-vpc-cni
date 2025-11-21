@@ -93,6 +93,11 @@ resource "aws_eks_cluster" "eks_cluster" {
   vpc_config {
     subnet_ids = var.subnet_ids
   }
+tags = {
+    Project     = "terraform-eks-vpc-cni"
+    Environment = "demo"
+  }
+
 
   # Ensure that the IAM role is created before the cluster.
   depends_on = [
