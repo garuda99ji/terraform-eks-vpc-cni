@@ -74,8 +74,12 @@ Again, Terraform will ask for confirmation. Type yes and press Enter.
 
 ## Potential errors
 
-1. VPC is not properly configured - check internet gateway, security group outbound rules and route table.
-2. Define only public subnet - otherwise node could be launched in private subnet and would require a NAT gateway to talk to the internet.
+1. In case you are not able to connect to AWS and get an error " did you specify the right host or port". Run the following command 
+```bash 
+aws eks update-kubeconfig --region <your-region> --name <your cluster name>
+```
+2. VPC is not properly configured - check internet gateway, security group outbound rules and route table.
+3. Define only public subnet - otherwise node could be launched in private subnet and would require a NAT gateway to talk to the internet.
 
 ## optional cleanup
 
